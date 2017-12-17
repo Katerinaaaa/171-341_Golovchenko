@@ -15,7 +15,7 @@ Vector::Vector() // создание класса векторов
 
 
 Vector operator + (Vector & vector1,
-	Vector & vector2)
+	Vector & vector2) // перегрузка оператора + 
 {
 	Vector vector_result;
 	vector_result.j = vector1.j + vector2.j;
@@ -24,7 +24,7 @@ Vector operator + (Vector & vector1,
 }
 
 Vector operator - (Vector & vector1,
-	Vector & vector2)
+	Vector & vector2) // перегрузка оператора - 
 {
 	Vector vector_result;
 	vector_result.j = vector1.j - vector2.j;
@@ -33,7 +33,7 @@ Vector operator - (Vector & vector1,
 }
 
 Vector operator * (Vector & vector1,
-	Vector & vector2)
+	Vector & vector2) // перегрузка оператора * 
 {
 	Vector vector_result;
 	vector_result.j = vector1.j * vector2.j;
