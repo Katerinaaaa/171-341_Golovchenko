@@ -7,25 +7,53 @@
 
 using namespace std; 
 
-Vector::Vector() // создание класса векторов 
+Vector::Vector() // СЃРѕР·РґР°РЅРёРµ РєР»Р°СЃСЃР° РІРµРєС‚РѕСЂРѕРІ 
 {
-	k = 0; // количество столбцов 
-	data1 = 0; // вектор 
+	k = 0; // РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ 
+	data1 = 0; // РІРµРєС‚РѕСЂ 
 }
 
 
-void Vector::scalar_mult (int &scalar_mult, int **vector1, int **vector2, int p1, int p2) // функция для вычисления скалярного произведения векторов 
+Vector operator + (Vector & vector1,
+	Vector & vector2)
+{
+	Vector vector_result;
+	vector_result.j = vector1.j + vector2.j;
+
+	return vector_result;
+}
+
+Vector operator - (Vector & vector1,
+	Vector & vector2)
+{
+	Vector vector_result;
+	vector_result.j = vector1.j - vector2.j;
+
+	return vector_result;
+}
+
+Vector operator * (Vector & vector1,
+	Vector & vector2)
+{
+	Vector vector_result;
+	vector_result.j = vector1.j * vector2.j;
+
+	return vector_result;
+}
+
+
+void Vector::scalar_mult (int &scalar_mult, int **vector1, int **vector2, int p1, int p2) // С„СѓРЅРєС†РёСЏ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ СЃРєР°Р»СЏСЂРЅРѕРіРѕ РїСЂРѕРёР·РІРµРґРµРЅРёСЏ РІРµРєС‚РѕСЂРѕРІ 
 {
 	{
 		for (int j = 0; j < p1; j++)
 		{
-			scalar_mult = scalar_mult + vector1[0][j] * vector2[0][j]; // формула скалярного умножения векторов 
+			scalar_mult = scalar_mult + vector1[0][j] * vector2[0][j]; // С„РѕСЂРјСѓР»Р° СЃРєР°Р»СЏСЂРЅРѕРіРѕ СѓРјРЅРѕР¶РµРЅРёСЏ РІРµРєС‚РѕСЂРѕРІ 
 		}
 	}
 
 }
 
-Vector::~Vector() // вызов деструктора 
+Vector::~Vector() // РІС‹Р·РѕРІ РґРµСЃС‚СЂСѓРєС‚РѕСЂР° 
 {
 	delete[] data1; 
 }
