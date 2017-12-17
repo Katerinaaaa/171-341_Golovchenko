@@ -26,7 +26,7 @@ int Matrix::get(int i, int j)
 
 
 Matrix operator + (Matrix & matrix1, 
-				Matrix & matrix2)
+				Matrix & matrix2) // перегрузка оператора +
 {
 	Matrix result;
 	result.i = matrix1.i + matrix2.i;
@@ -37,7 +37,7 @@ Matrix operator + (Matrix & matrix1,
 
 
 Matrix operator - (Matrix & matrix1,
-	Matrix & matrix2)
+	Matrix & matrix2) // перегрузка оператора -
 {
 	Matrix result;
 	result.i = matrix1.i - matrix2.i;
@@ -48,7 +48,7 @@ Matrix operator - (Matrix & matrix1,
 
 
 Matrix operator * (Matrix & matrix1,
-	Matrix & matrix2)
+	Matrix & matrix2) // перегрузка оператора * (матрица*матрица) 
 {
 	Matrix result;
 	result.i = matrix1.i * matrix2.i;
@@ -58,7 +58,7 @@ Matrix operator * (Matrix & matrix1,
 }
 
 Matrix operator * (Matrix & matrix1,
-	Matrix & vector1)
+	Matrix & vector1) // перегрузка оператора * (матрица*вектор) 
 {
 	Matrix result;
 	result.j = matrix1.j * vector1.j;
@@ -67,7 +67,7 @@ Matrix operator * (Matrix & matrix1,
 }
 
 ostream & operator << (ostream & matrix1,
-	Matrix & matrix2)
+	Matrix & matrix2) // перегрузка оператора << 
 {
 	matrix1 << "Matrix: " << endl;
 	matrix1 << "\ti = " << matrix2.i << ";" << endl;
