@@ -7,10 +7,14 @@
 
 using namespace std; 
 
-Vector::Vector() // создание класса векторов 
+Vector::Vector() : Matrix() // создание класса векторов 
 {
-	k = 0; // количество столбцов 
-	data1 = 0; // вектор 
+
+}
+
+Vector::Vector(int size) : Matrix(size, 1)
+{
+
 }
 
 
@@ -18,8 +22,7 @@ Vector operator + (Vector & vector1,
 	Vector & vector2) // перегрузка оператора + 
 {
 	Vector vector_result;
-	vector_result.j = vector1.j + vector2.j;
-
+	
 	return vector_result;
 }
 
@@ -27,20 +30,31 @@ Vector operator - (Vector & vector1,
 	Vector & vector2) // перегрузка оператора - 
 {
 	Vector vector_result;
-	vector_result.j = vector1.j - vector2.j;
+
 
 	return vector_result;
 }
 
-Vector operator * (Vector & vector1,
-	Vector & vector2) // перегрузка оператора * 
+int operator * (Vector & vector1,
+
+	Vector & vector2) // перегрузка оператора * (вектор*вектор - скалярное произведение) 
 {
-	Vector vector_result;
-	vector_result.j = vector1.j * vector2.j;
 
-	return vector_result;
+	if (vector1.num_rows() != vector2.num_rows())
+	{
+		cout << "WRONG" << endl;
+		exit(3);
+	}
+
+	int result = 0;
+
+	for (int i = 0; i < vector1.num_rows(); i++)
+	{
+		result += vector1.get(i, 0) * vector2.get(i, 0);
+	}
+
+	return result;
 }
-
 
 void Vector::scalar_mult (int &scalar_mult, int **vector1, int **vector2, int p1, int p2) // функция для вычисления скалярного произведения векторов 
 {
@@ -55,5 +69,4 @@ void Vector::scalar_mult (int &scalar_mult, int **vector1, int **vector2, int p1
 
 Vector::~Vector() // вызов деструктора 
 {
-	delete[] data1; 
 }
