@@ -1,38 +1,53 @@
 #pragma once
+#include <iostream>
+
 class Matrix
 {
 
 public:
 
-	void set_size(int n, int m); // задание размера матрицы 
-
-	int get (int i, int j); // чтение элемента на позиции [i, j]
-
-	void set(int i, int j, int value); // запись элемента на позицию [i, j]
-
-	void print (); // вывод матрицы на экран 
-
-	int num_rows(); // количество строк 
-
-	int num_cols(); // количество столбцов 
+	void set_size(int n, int m); // Р·Р°РґР°РЅРёРµ СЂР°Р·РјРµСЂР° РјР°С‚СЂРёС†С‹ 
 	
-	void matrix_mult(int **matrix_result, int **matrix1, int **matrix2, int t1, int p1, int t2, int p2); // произведение матриц 
+	int get (int i, int j); // С‡С‚РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РЅР° РїРѕР·РёС†РёРё [i, j]
 
-	void matrix_matrix(int **result, int **matrix1, int **matrix2, int n1, int m1, int n2, int m2); // сложение матриц 
+	void set(int i, int j, int value); // Р·Р°РїРёСЃСЊ СЌР»РµРјРµРЅС‚Р° РЅР° РїРѕР·РёС†РёСЋ [i, j]
+
+	void print (); // РІС‹РІРѕРґ РјР°С‚СЂРёС†С‹ РЅР° СЌРєСЂР°РЅ 
+
+	int num_rows(); // РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє 
+
+	int num_cols(); // РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ 
+	
+	void matrix_mult(int **matrix_result, int **matrix1, int **matrix2, int t1, int p1, int t2, int p2); // РїСЂРѕРёР·РІРµРґРµРЅРёРµ РјР°С‚СЂРёС† 
+
+	void matrix_matrix(int **result, int **matrix1, int **matrix2, int n1, int m1, int n2, int m2); // СЃР»РѕР¶РµРЅРёРµ РјР°С‚СЂРёС† 
 
 
 
 	Matrix();
+	Matrix(const Matrix& other); // РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ 
 	Matrix(int n, int m); 
 	virtual ~Matrix();
 
 private:
 
-	int m; // количество столбцов 
+	int m; // РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ 
 
-	int n; // количество строк 
+	int n; // РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє 
 
-	int *data; // массив 
+	int *data; // РјР°СЃСЃРёРІ 
 
 };
+
+Matrix operator + (Matrix & matrix1,
+	Matrix & matrix2);
+
+Matrix operator - (Matrix & matrix1,
+	Matrix & matrix2);
+
+Matrix operator * (Matrix & matrix1,
+	Matrix & matrix2);
+
+std::ostream & operator<< (std::ostream & os,
+	Matrix & matrix1);
 
