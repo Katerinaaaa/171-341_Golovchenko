@@ -12,6 +12,17 @@ Matrix::Matrix() // создание класса матриц
 	data = 0; // матрица 
 }
 
+Matrix::Matrix(const Matrix& other)
+{
+	m = other.m;
+	n = other.n;
+	data = new int[m * n];
+	for (int i = 0; i < m * n; i++)
+	{
+		data[i] = other.data[i];
+	}
+}
+
 int Matrix::get(int i, int j) 
 {
 	if ((data != 0) &&(i < n) && (j < m))
@@ -28,20 +39,48 @@ int Matrix::get(int i, int j)
 Matrix operator + (Matrix & matrix1, 
 				Matrix & matrix2) // перегрузка оператора +
 {
-	Matrix result;
-	result.i = matrix1.i + matrix2.i;
-	result.j = matrix1.j + matrix2.j;
+	if (matrix1.num_cols() != matrix2.num_cols() ||
+		matrix1.num_rows() != matrix2.num_rows())
+	{
+		cout << "WRONG" << endl;
+		exit(1);
+	}
+
+	Matrix result(matrix1.num_rows(), matrix1.num_cols());
+	for (int i = 0; i < matrix1.num_rows(); i++)
+	{
+		for (int j = 0; j < matrix1.num_cols(); j++)
+		{
+			int value = matrix1.get(i, j) + matrix2.get(i, j);
+			result.set(i, j, value); 
+		}
+	}
+
+
 
 	return result; 
 }
 
 
 Matrix operator - (Matrix & matrix1,
-	Matrix & matrix2) // перегрузка оператора -
+	Matrix & matrix2) // перегрузка оператора +
 {
-	Matrix result;
-	result.i = matrix1.i - matrix2.i;
-	result.j = matrix1.j - matrix2.j;
+	if (matrix1.num_cols() != matrix2.num_cols() ||
+		matrix1.num_rows() != matrix2.num_rows())
+	{
+		cout << "WRONG" << endl;
+		exit(2);
+	}
+
+	Matrix result(matrix1.num_rows(), matrix1.num_cols());
+	for (int i = 0; i < matrix1.num_rows(); i++)
+	{
+		for (int j = 0; j < matrix1.num_cols(); j++)
+		{
+			int value = matrix1.get(i, j) - matrix2.get(i, j);
+			result.set(i, j, value);
+		}
+	}
 
 	return result;
 }
@@ -50,30 +89,44 @@ Matrix operator - (Matrix & matrix1,
 Matrix operator * (Matrix & matrix1,
 	Matrix & matrix2) // перегрузка оператора * (матрица*матрица) 
 {
-	Matrix result;
-	result.i = matrix1.i * matrix2.i;
-	result.j = matrix1.j * matrix2.j;
+	if (matrix1.num_cols() != matrix2.num_rows())
+	{
+		cout << "WRONG" << endl;
+		exit(3);
+	}
 
+	Matrix result(matrix1.num_rows(), matrix2.num_cols());
+	for (int i = 0; i < matrix1.num_rows(); i++)
+	{
+		for (int j = 0; j < matrix2.num_cols(); j++)
+		{
+			int value = 0;
+
+			for (int k = 0; k < matrix1.num_cols(); k++)
+			{
+				value += matrix1.get(i, k) * matrix2.get(k, j);
+			}
+			result.set(i, j, value);
+		}
+	}
+	
 	return result;
 }
 
-Matrix operator * (Matrix & matrix1,
-	Matrix & vector1) // перегрузка оператора * (матрица*вектор) 
-{
-	Matrix result;
-	result.j = matrix1.j * vector1.j;
+ostream & operator << (ostream & os,
+	Matrix & matrix1) // перегрузка оператора << 
+{	
+	for (int i = 0; i < matrix1.num_rows(); i++)
+	{
+		os << "\t[ ";
+		for (int j = 0; j < matrix1.num_cols(); j++)
+		{
+			os << matrix1.get(i, j) << " "; 
+		}
+		os << "]" << endl;
+	}
 
-	return result;
-}
-
-ostream & operator << (ostream & matrix1,
-	Matrix & matrix2) // перегрузка оператора << 
-{
-	matrix1 << "Matrix: " << endl;
-	matrix1 << "\ti = " << matrix2.i << ";" << endl;
-	matrix1 << "\tj = " << matrix2.j << ";" << endl;
-
-	return matrix1;
+	return os;
 }
 
 
