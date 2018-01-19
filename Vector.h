@@ -5,12 +5,11 @@ class Vector :
 {
 public:
 	Vector();
+	Vector(int size);
 	~Vector();
-	void Vector::scalar_mult(int &scalar_mult, int **vector1, int **vector2, int p1, int p2); // функция для скалярного умножения векторов 
 
-private:
-	int k; 
-	int *data1;
-
+	void Vector::scalar_mult(int &scalar_mult, int **vector1, int **vector2, int p1, int p2); // С„СѓРЅРєС†РёСЏ РґР»СЏ СЃРєР°Р»СЏСЂРЅРѕРіРѕ СѓРјРЅРѕР¶РµРЅРёСЏ РІРµРєС‚РѕСЂРѕРІ 
 };
 
+int operator * (Vector & vector1,
+	Vector & vector2); // РїРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР°
