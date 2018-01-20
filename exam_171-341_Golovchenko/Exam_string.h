@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 class Exam_string
 {
 public:
@@ -6,7 +7,7 @@ public:
 	Exam_string(); // вызов конструктора 
 	Exam_string(const Exam_string& other); // конструктор (№1) 
 	Exam_string(const char *source); // конструктор (№2) 
-	Exam_string(const std::string& source); // конструктор (№3)
+	Exam_string(const std::string& source);
 	
 
 	~Exam_string(); // вызов деструктора 
@@ -14,6 +15,7 @@ public:
 	
 
 	char get(int i); // метод для чтения строки 
+	int num(); // вывод размера строки 
 	char insert(int i, int value); // Метод, вставляющий на заданную позицию 
 								   // внутри строки указанную в параметрах последовательность символов(*char) 
 	void add(char s); // Метод add(), принимающий строку символов *char, 
@@ -22,6 +24,7 @@ public:
 					  // принимаемой) 
 	void clear(); // очищение строки 
 	void print(); // вывод строки 
+	char cut(int i, int number); // метод, удаляющий с заданной позиции заданное в параметрах количество символов 
 
 private:
 
