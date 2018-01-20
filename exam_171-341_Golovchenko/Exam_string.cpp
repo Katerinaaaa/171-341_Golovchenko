@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Exam_string.h"
 #include <iostream> 
+#include <string>
 
 using namespace std; 
 
@@ -47,10 +48,15 @@ Exam_string::Exam_string(const std::string& source) // копирование и
 	a = max;
 	st = new char[max];
 	// копирование исходнной строки 
-	for (int i = 0; i < source.size(); i++)
+	for (int i = 0; i < source.size(); i++) 
 	{
 		st[i] = source[i];
 	}
+}
+
+int Exam_string::num() // вывод размера строки 
+{
+	return a; 
 }
 
 
@@ -102,10 +108,33 @@ void Exam_string::grow() // увеличение размера строки
 	{
 		new_st[i] = st[i]; 
 	}
+
 	delete[] st; 
+
 	st = new_st; 
 
 	max = 2 * max + 1; 
+}
+
+char Exam_string::cut(int s, int number) // Метод, удаляющий с заданной позиции заданное в
+										// параметрах количество символов 
+{
+	if (number + s < a)
+	{
+		for (int i = number; i < number + s; i++)
+		{
+			st[i] = ' ';
+		}
+		for (int i = number; i < s + number; i++)
+		{
+			st[i] = st[i + s];
+			st[number + s] = '\0'; 
+		}
+	}
+	else
+	{
+		return 0; 
+	}
 }
 
 void Exam_string::clear() // очищение строки 
