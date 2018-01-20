@@ -34,19 +34,59 @@ char Exam_string::get(int i) // чтение строки
 	}
 }
 
-char Exam_string::insert()
+char Exam_string::insert(int i, int value) // Метод, вставляющий на заданную позицию 
+// внутри строки указанную в параметрах последовательность символов(*char)
 {
+	if ((st != 0) && (i < a)) // строка не должна быть нулевой, 
+							// а так же не должно происходить переполнение строки 
+	{
+		st[i] = value; // программа записывает символ в выбранное место 
+	}
+	else
+	{
+		return 0; 
+	}
 
 }
 
-void Exam_string::add()
+void Exam_string::add(char s) // Метод add(), принимающий строку символов *char,
+						// либо стандартную строку std∷string и выполняющий
+						// конкатенацию(сложение имеющейся строки с
+						// принимаемой)
 {
-
+	if (a + 1 > max)
+	{
+		grow();
+	}
+	st[a] = s; 
+	a = a + 1; 
 }
 
-void Exam_string::clear()
+void Exam_string::grow() // увеличение размера строки 
 {
+	new_st = new char[2 * max + 1];
 
+	for (int i = 0; i < max; i++)
+	{
+		new_st[i] = st[i]; 
+	}
+	delete[] st; 
+	st = new_st; 
+
+	max = 2 * max + 1; 
+}
+
+void Exam_string::clear() // очищение строки 
+{
+	a = 0; 
+}
+
+char Exam_string::print()
+{
+	for (int i = 0; i < a; i++)
+	{
+		cout << get(i) << " "; 
+	}
 }
 
 Exam_string::~Exam_string()
