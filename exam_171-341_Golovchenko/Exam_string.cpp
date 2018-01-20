@@ -12,7 +12,7 @@ Exam_string::Exam_string() // создание класса строк
 	char *new_st = 0; // динамический массив, хранящий строку (новую) 
 }
 
-Exam_string::Exam_string(const Exam_string& other) // создание пустой строки 
+Exam_string::Exam_string(const Exam_string& other) // создание пустой строки (конструктор №1) 
 {
 	a = other.a; 
 	st = new char[a]; // создание динамического массива (строка нулевой длины) 
@@ -21,6 +21,38 @@ Exam_string::Exam_string(const Exam_string& other) // создание пуст�
 		st[i] = other.st[i]; 
 	}
 }
+
+Exam_string::Exam_string(const char *source) // копирование из массива char (конструктор №2) 
+{
+	a = 0; 
+	// Вычисление длины исходной строки 
+	while (source[a] != 0)
+	{
+		a++; 
+	}
+	max = a;
+	st = new char[max]; 
+
+	// Копирование исходной строки 
+	for (int i = 0; i < a; i++)
+	{
+		st[i] = source[i]; 
+	}
+}
+
+Exam_string::Exam_string(const std::string& source) // копирование из std::string (конструктор №3) 
+{
+	// Выделение такого количества байт, сколько потребуется для работы 
+	max = source.size();
+	a = max;
+	st = new char[max];
+	// копирование исходнной строки 
+	for (int i = 0; i < source.size(); i++)
+	{
+		st[i] = source[i];
+	}
+}
+
 
 char Exam_string::get(int i) // чтение строки 
 {
@@ -81,7 +113,7 @@ void Exam_string::clear() // очищение строки
 	a = 0; 
 }
 
-char Exam_string::print()
+void Exam_string::print() // вывод строки на экран 
 {
 	for (int i = 0; i < a; i++)
 	{
@@ -89,7 +121,7 @@ char Exam_string::print()
 	}
 }
 
-Exam_string::~Exam_string()
+Exam_string::~Exam_string() // деструктор 
 {
-	delete[] st; 
+	delete[] st; // удаление строки 
 }
